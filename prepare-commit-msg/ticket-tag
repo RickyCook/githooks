@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#
+# Automatically add ticket refs to commit messages based on your branch name.
+#
+# All that is required is that your branch ends in -[0-9]+, which is your
+# ticket number.
+#
+
 BRANCH=`git rev-parse --abbrev-ref HEAD`
 MESSAGE_FILE="$1"
 if [[ "$BRANCH" =~ -[0-9]+$ ]]; then
