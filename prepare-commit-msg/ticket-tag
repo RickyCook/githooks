@@ -31,5 +31,5 @@ if [[ "$BRANCH" =~ -[0-9]+$ ]]; then
 	# Redmine
 	# TICKET_STRING="Refs: #$TICKET"
 	
-	echo -e "$TICKET_STRING \n$(cat $MESSAGE_FILE)" > $MESSAGE_FILE
+	echo -e "\n\n$TICKET_STRING\n$(cat $MESSAGE_FILE)" > $MESSAGE_FILE
 fi
