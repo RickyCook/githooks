@@ -10,6 +10,7 @@
 BRANCH=`git rev-parse --abbrev-ref HEAD`
 MESSAGE_FILE="$1"
 
+# Don't add if a ticket ref already found (eg in an --amend)
 if grep -E '\[#[0-9]+\]' "$MESSAGE_FILE"; then
 	exit 0
 fi
