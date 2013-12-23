@@ -10,10 +10,17 @@
 BRANCH=`git rev-parse --abbrev-ref HEAD`
 MESSAGE_FILE="$1"
 
-# Don't add if a ticket ref already found (eg in an --amend)
-if grep -E '\[#[0-9]+\]' "$MESSAGE_FILE"; then
-	exit 0
-fi
+# Don't add in special cases
+case "$2,$3" in
+	#commit,) ;;  # --amend, -c, -C
+	#merge,) ;;
+	#message,) ;;
+	#squash,) ;;
+	#template,) ;;
+
+	,) ;;         # standard commit
+	*) exit 0 ;;  # exit on all other "special" commits (including amend)
+esac
 
 if [[ "$BRANCH" =~ -[0-9]+$ ]]; then
 	TICKET="$(echo $BRANCH | grep -Eo '[0-9]+$')"
