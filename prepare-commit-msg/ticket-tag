@@ -9,6 +9,11 @@
 
 BRANCH=`git rev-parse --abbrev-ref HEAD`
 MESSAGE_FILE="$1"
+
+if grep '[#$TICKET]' "$MESSAGE_FILE"; then
+	exit 0
+fi
+
 if [[ "$BRANCH" =~ -[0-9]+$ ]]; then
 	TICKET="$(echo $BRANCH | grep -Eo '[0-9]+$')"
 	
@@ -20,4 +25,3 @@ if [[ "$BRANCH" =~ -[0-9]+$ ]]; then
 	
 	echo -e "$TICKET_STRING \n$(cat $MESSAGE_FILE)" > $MESSAGE_FILE
 fi
-
